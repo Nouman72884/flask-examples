@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+
+       stages {
+            stage('SCM checkout') {
+                  steps {
+                        git url: 'https://github.com/Nouman72884/flask-examples.git'
+                        }
+             }
+
+              stage('transfer artifacts') {
+                    steps {
+                          sshPublisher(publishers: [sshPublisherDesc(configName: 'webserver', transfers: [sshTransfer(excludes: '', execCommand: 'sudo apt-get update -y;sudo apt-get install python-pip -y;cd /tmp/tmp/;pip install -r requirements.txt', execTimeout: 3000000, flatten: true, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/tmp', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '*')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
+                          }
+              }
+       }
+}
