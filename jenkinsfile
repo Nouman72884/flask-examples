@@ -19,7 +19,7 @@ pipeline {
                }
                stage('deploy') {
                   steps {
-                          sh 'scp -r /root/.cache/pip/wheels/f2/c8/8f/df2bd0e6006137de78d2cc9b1a847cbf5ecdcd59cbc519363d/pymongo-2.7-cp27-cp27mu-linux_x86_64.whl ubuntu@52.70.253.211:/tmp'
+                          sh 'scp -r /root/.cache/pip/wheels/f2/c8/8f/df2bd0e6006137de78d2cc9b1a847cbf5ecdcd59cbc519363d/pymongo-2.7-cp27-cp27mu-linux_x86_64.whl ubuntu@52.70.253.211:/tmp -yes'
                         }
               }
               stage('transfer artifacts') {
