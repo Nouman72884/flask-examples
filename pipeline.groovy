@@ -1,4 +1,11 @@
 pipelineJob("flask_app_demo") {
+  properties {
+    pipelineTriggers {
+      triggers {
+        githubPush()
+      }
+    }
+  }
   definition {
     cpsScm {
       scm {
