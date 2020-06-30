@@ -10,10 +10,9 @@ pipeline {
              stage('preparation') {
                    steps {
                          sh 'sudo apt-get install python-pip -y'
-                         pip install -r requirements.txt
                          }
               }
-              stage('preparation') {
+              stage('preparation 2') {
                     steps {
                           sh 'pip install -r requirements.txt'
                           }
