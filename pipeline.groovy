@@ -12,7 +12,7 @@ pipelineJob("flask_app_demo") {
         git {
           remote {
             url("https://github.com/Nouman72884/flask-examples.git")
-            credentials("github-credentials")
+            credentials("github_credentials")
           }
           branch('master')
         }
