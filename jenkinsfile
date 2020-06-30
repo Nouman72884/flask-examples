@@ -7,10 +7,25 @@ pipeline {
                         git url: 'https://github.com/Nouman72884/flask-examples.git'
                         }
              }
-
+             stage('preparation') {
+                   steps {
+                         sh 'sudo apt-get install python-pip -y'
+                         pip install -r requirements.txt
+                         }
+              }
+              stage('preparation') {
+                    steps {
+                          sh 'pip install -r requirements.txt'
+                          }
+               }
+               stage('deploy') {
+                  steps {
+                          sh 'scp -r /root/.cache/pip/wheels/f2/c8/8f/df2bd0e6006137de78d2cc9b1a847cbf5ecdcd59cbc519363d/pymongo-2.7-cp27-cp27mu-linux_x86_64.whl ubuntu@52.70.253.211:/tmp'
+                        }
+              }
               stage('transfer artifacts') {
                     steps {
-                          sshPublisher(publishers: [sshPublisherDesc(configName: 'webserver', transfers: [sshTransfer(excludes: '', execCommand: 'sudo apt-get update -y;sudo apt-get install python-pip -y;cd /tmp/tmp/;pip install -r requirements.txt', execTimeout: 3000000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/tmp', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '**/*')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
+                          sshPublisher(publishers: [sshPublisherDesc(configName: 'webserver', transfers: [sshTransfer(excludes: '', execCommand: 'cd /tmp/tmp;pip install pymongo-2.7-cp27-cp27mu-linux_x86_64.whl ', execTimeout: 3000000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/tmp', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '**/*')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
                           }
               }
        }
