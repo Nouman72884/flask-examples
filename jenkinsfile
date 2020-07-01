@@ -10,11 +10,12 @@ pipeline {
              stage('preparation') {
                    steps {
                          sh 'sudo apt-get install python-pip -y'
+                         sh 'pip install wheel'
                          }
               }
               stage('preparation 2') {
                     steps {
-                          sh 'pip install --system -r requirements.txt -t /var/lib/jenkins/workspace/flask_app_demo'
+                          sh 'pip install -r requirements.txt -t /var/lib/jenkins/workspace/flask_app_demo'
                           }
                }
               stage('transfer artifacts') {
