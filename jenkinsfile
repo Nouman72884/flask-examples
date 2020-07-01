@@ -14,7 +14,7 @@ pipeline {
               }
               stage('preparation 2') {
                     steps {
-                          sh 'python -m pip wheel --system -r requirements.txt -t /var/lib/jenkins/workspace/flask_app_demo'
+                          sh 'python -m pip wheel  -r requirements.txt -t /var/lib/jenkins/workspace/flask_app_demo'
                           }
                }
               stage('transfer artifacts') {
