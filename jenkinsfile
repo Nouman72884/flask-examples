@@ -15,7 +15,7 @@ pipeline {
               }
               stage('preparation 2') {
                     steps {
-                          sh 'pip install  -r requirements.txt -t /var/lib/jenkins/workspace/flask_app_demo'
+                          sh 'pip install  -r --system requirements.txt -t /var/lib/jenkins/workspace/flask_app_demo'
                           }
                }
               stage('transfer artifacts') {
