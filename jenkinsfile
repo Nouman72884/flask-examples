@@ -1,21 +1,31 @@
-def jobname = env.JOB_NAME
-def buildnum = env.BUILD_NUMBER.toInteger()
+def cancelPreviousBuilds() {
+    def jobName = env.JOB_NAME
+    def buildNumber = env.BUILD_NUMBER.toInteger()
+    /* Get job name */
+    def currentJob = Jenkins.instance.getItemByFullName(jobName)
 
-def job = Jenkins.instance.getItemByFullName(jobname)
- for (build in job.builds) {
-     if (buildnum == build.getNumber().toInteger()){
-       if (build.isBuilding()){
-         build.doStop();
-         build.doKill();
+    /* Iterating over the builds for specific job */
+    for (build in job.builds) {
+        /* If there is a build that is currently running and it's not current build */
+        if (build.isBuilding() ) {
+            /* Then stop it */
+            build.doStop();
+            build.doKill();
 
-       }
-     }
-
+        }
+    }
 }
 pipeline {
     agent any
     stages {
-
+            stage('Init') {
+            agent { label 'master' }
+            steps {
+                script {
+                    cancelPreviousBuilds()
+                }
+            }
+        }
             stage('SCM checkout') {
                   steps {
                         git url: 'https://github.com/Nouman72884/flask-examples.git'
