@@ -9,6 +9,7 @@ pipeline {
              }
              stage('preparation') {
                    steps {
+                         sh 'sudo apt-get install python -y'
                          sh 'sudo apt-get install python-pip -y'
                          }
               }
