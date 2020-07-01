@@ -15,12 +15,12 @@ pipeline {
               }
               stage('preparation 2') {
                     steps {
-                          sh 'pip wheel --wheel-dir=/tmp -r requirements.txt'
+                          sh 'pip wheel  -r requirements.txt'
                           }
                }
               stage('transfer artifacts') {
                     steps {
-                          sshPublisher(publishers: [sshPublisherDesc(configName: 'webserver', transfers: [sshTransfer(excludes: '', execCommand: 'sudo apt-get install python -y', execTimeout: 3000000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/tmp', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '**/*')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
+                          sshPublisher(publishers: [sshPublisherDesc(configName: 'webserver', transfers: [sshTransfer(excludes: '', execCommand: 'sudo apt-get install python-pip -y', execTimeout: 3000000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/tmp', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '**/*')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
                           }
               }
        }
