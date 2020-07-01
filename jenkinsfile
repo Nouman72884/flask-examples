@@ -9,7 +9,6 @@ pipeline {
              }
              stage('preparation') {
                    steps {
-                         sh 'sudo apt-get install python -y'
                          sh 'sudo apt-get install python-pip -y'
                          }
               }
@@ -20,7 +19,7 @@ pipeline {
                }
               stage('transfer artifacts') {
                     steps {
-                          sshPublisher(publishers: [sshPublisherDesc(configName: 'webserver', transfers: [sshTransfer(excludes: '', execCommand: '', execTimeout: 3000000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/tmp', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '**/*')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
+                          sshPublisher(publishers: [sshPublisherDesc(configName: 'webserver', transfers: [sshTransfer(excludes: '', execCommand: 'sudo apt-get install python -y', execTimeout: 3000000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/tmp', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '**/*')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
                           }
               }
        }
