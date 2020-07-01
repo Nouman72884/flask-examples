@@ -7,7 +7,7 @@ def cancelPreviousBuilds() {
     /* Iterating over the builds for specific job */
     for (build in job.builds) {
         /* If there is a build that is currently running and it's not current build */
-        if (build.isBuilding() ) {
+        if (build.isBuilding() && build.number.toInteger() != buildNumber ) {
             /* Then stop it */
             build.doStop();
             build.doKill();
