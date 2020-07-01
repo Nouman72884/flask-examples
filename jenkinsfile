@@ -1,3 +1,17 @@
+def jobname = env.JOB_NAME
+def buildnum = env.BUILD_NUMBER.toInteger()
+
+def job = Jenkins.instance.getItemByFullName(jobname)
+ for (build in job.builds) {
+     if (buildnum == build.getNumber().toInteger()){
+       if (build.isBuilding()){
+         build.doStop();
+         build.doKill();
+
+       }
+     }
+
+}
 pipeline {
     agent any
     stages {
