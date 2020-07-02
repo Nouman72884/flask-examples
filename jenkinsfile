@@ -24,6 +24,7 @@ pipeline {
                           }
               }
               stage('Deploy'){
+                    script {
                     steps {
                           if(currentBuild.currentResult == "SUCCESS" || currentBuild.currentResult == "UNSTABLE"){
                             if (isUnix()) {
@@ -32,6 +33,7 @@ pipeline {
                                 bat 'echo "Build Succeded."'
                               }
                              }
+                            }
                             }
                             }
        }
