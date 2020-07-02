@@ -29,7 +29,7 @@ pipeline {
                            execCommand: 'sudo apt-get install python-pip -y;cd /tmp/tmp/;pip install *.whl;sudo apt install python3-flask -y;cd 01-hello-world/;export FLASK_APP=hello.py;killall flask;nohup flask run --host=0.0.0.0 &',
                            execTimeout: 35000,
                            flatten: false,
-                           makeEmptyDirs: false,
+                           makeEmptyDirs: true,
                            noDefaultExcludes: false,
                            patternSeparator: '[, ]+',
                            remoteDirectory: '/tmp',
